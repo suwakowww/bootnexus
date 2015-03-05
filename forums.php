@@ -26,6 +26,7 @@ function forum_stats ()
 	else
 		$forumusers = $lang_forums['text_no_active_users'];
 ?>
+<div class="col-md-3">
 <h2 align="left"><?php echo $lang_forums['text_stats'] ?></h2>
 <table width="100%"><tr><td class="text">
 <?php
@@ -44,7 +45,7 @@ function forum_stats ()
 	print($lang_forums['text_our_members_have'] ."<b>".$postcount."</b>". $lang_forums['text_posts_in_topics']."<b>".$topiccount."</b>".$lang_forums['text_in_topics']."<b><font class=\"new\">".$todaypostcount."</font></b>".$lang_forums['text_new_post'].add_s($todaypostcount).$lang_forums['text_posts_today']."<br /><br />");
 	print($forumusers);
 ?>
-</td></tr></table>
+</td></tr></table></div>
 <?php
 }
 
@@ -180,7 +181,7 @@ function insert_compose_frame($id, $type = 'new')
 	$hassubject = false;
 	$subject = "";
 	$body = "";
-	print("<form id=\"compose\" method=\"post\" name=\"compose\" action=\"?action=post\">\n");
+	print("<form id=\"compose\" class=\"form-horizontal\" method=\"post\" name=\"compose\" action=\"?action=post\">\n");
 	switch ($type){
 		case 'new':
 		{
@@ -594,7 +595,7 @@ if ($action == "viewtopic")
 	"\">".$lang_forums['text_next']." &rarr;</a></li>\n";
 
 	$pagerstr = join(" | ", $pagerarr);
-	$pagertop = "<div class=\"container\"><p align=\"center\"><ul class=\"pager\">".$pager."</ul><br /><nav><ul class=\"pagination\">".$pagerstr."</ul></nav></p></div>\n";
+	$pagertop = "<div class=\"row\"><div class=\"container\"><p align=\"center\"><ul class=\"pager\">".$pager."</ul><br /><nav><ul class=\"pagination\">".$pagerstr."</ul></nav></p></div></div>\n";
 	$pagerbottom = "<div class=\"container\"><p align=\"center\"><nav><ul class=\"pagination\">".$pagerstr."</ul></nav><br /><ul class=\"pager\">".$pager."</ul></p></div>\n";
 	//------ Get posts
 
@@ -603,7 +604,7 @@ if ($action == "viewtopic")
 	stdhead($lang_forums['head_view_topic']." \"".$orgsubject."\"");
 	begin_main_frame("",true);
 
-	print("<ul class=\"breadcrumb\"><li><a class=\"faqlink\" href=\"forums.php\">".$SITENAME."&nbsp;".$lang_forums['text_forums']."</a></li><li><a class=\"faqlink\" href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid)."\">".$forumname."</a></li><li><span id=\"top\">".$subject.($locked ? "&nbsp;&nbsp;<b>[<span>".$lang_forums['text_locked']."</span>]</b>" : "")."</span></li></ul>");
+	print("<div class=\"container\"><ul class=\"breadcrumb\"><li><a class=\"faqlink\" href=\"forums.php\">".$SITENAME."&nbsp;".$lang_forums['text_forums']."</a></li><li><a class=\"faqlink\" href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid)."\">".$forumname."</a></li><li><span id=\"top\">".$subject.($locked ? "&nbsp;&nbsp;<b>[<span>".$lang_forums['text_locked']."</span>]</b>" : "")."</span></li></ul></div>");
 	end_main_frame();
 	print($pagertop);
 
@@ -1097,7 +1098,7 @@ if ($action == "viewforum")
 	$numtopics = mysql_num_rows($topicsres);
 	stdhead($lang_forums['head_forum']." ".$forumname);
 	begin_main_frame("",true);
-	print("<ul class=\"breadcrumb\"><li><a class=\"faqlink\" href=\"forums.php\">".$SITENAME."&nbsp;".$lang_forums['text_forums'] ."</a></li><li><a class=\"faqlink\" href=\"".htmlspecialchars("forums.php?action=viewforum&forumid=".$forumid)."\">".$forumname."</a></li></ul>\n");
+	print("<div class=\"container\"><ul class=\"breadcrumb\"><li><a class=\"faqlink\" href=\"forums.php\">".$SITENAME."&nbsp;".$lang_forums['text_forums'] ."</a></li><li><a class=\"faqlink\" href=\"".htmlspecialchars("forums.php?action=viewforum&forumid=".$forumid)."\">".$forumname."</a></li></ul></div>\n");
 	end_main_frame();
 	print("<br />");
 	$maypost = get_user_class() >= $row["minclasswrite"] && get_user_class() >= $row["minclasscreate"] && $CURUSER["forumpost"] == 'yes';
@@ -1232,7 +1233,7 @@ if ($action == "viewforum")
 ?>
 <td colspan="3" class="text-right">
 <div class="btn-group"><button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><?php echo $lang_forums['text_order']?><span class="caret"></span></button>
-<ul class="dropdown-menu" role="menu">
+<ul class="dropdown-menu dropdown-menu-right" role="menu">
 <li><a href="?action=viewforum&amp;forumid=<?php echo $forumid.$addparam?>&amp;sort=firstpostdesc"><?php echo $lang_forums['text_topic_desc']?></a></li>
 <li><a href="?action=viewforum&amp;forumid=<?php echo $forumid.$addparam?>&amp;sort=firstpostasc"><?php echo $lang_forums['text_topic_asc']?></a></li>
 <li><a href="?action=viewforum&amp;forumid=<?php echo $forumid.$addparam?>&amp;sort=lastpostdesc"><?php echo $lang_forums['text_post_desc']?></a></li>
@@ -1420,7 +1421,7 @@ stdhead($lang_forums['head_forums']);
 begin_main_frame();
 print("<h1 align=\"center\">".$SITENAME."&nbsp;".$lang_forums['text_forums']."</h1>");
 print("<p align=\"center\"><a href=\"?action=search\"><b>".$lang_forums['text_search']."</b></a> | <a href=\"?action=viewunread\"><b>".$lang_forums['text_view_unread']."</b></a> | <a href=\"?catchup=1\"><b>".$lang_forums['text_catch_up']."</b></a> ".(get_user_class() >= $forummanage_class ? "| <a href=\"forummanage.php\"><b>".$lang_forums['text_forum_manager']."</b></a>":"")."</p>");
-print("<table class=\"table table-hover\">\n");
+print("<div class=\"container\"><div class=\"row\"><div class=\"col-md-9\"><table class=\"table table-hover\">\n");
 
 if (!$overforums = $Cache->get_value('overforums_list')){
 	$overforums = array();
@@ -1523,9 +1524,10 @@ foreach ($overforums as $a)
 	$count++;
 }
 // End Table Mod
-print("</tbody></table>");
+print("</tbody></table></div>");
 if ($showforumstats_main == "yes")
 	forum_stats();
+print("</div>");
 end_main_frame();
 stdfoot();
 ?>

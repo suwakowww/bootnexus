@@ -478,6 +478,7 @@ function is_valid_id($id)
 //-------- Begins a main frame
 function begin_main_frame($caption = "", $center = false, $width = 100)
 {
+	print("<div class=\"row\">");
 	$tdextra = "";
 	if ($caption)
 	print("<h2>".$caption."</h2>");
@@ -487,12 +488,11 @@ function begin_main_frame($caption = "", $center = false, $width = 100)
 
 	$width = 940 * $width /100;
 
-	print("</div><div class=\"row\">");
 }
 
 function end_main_frame()
 {
-	print("</div><div class=\"row\">");
+	print("</div>");
 }
 
 function begin_frame($caption = "", $center = false, $padding = 10, $width="100%", $caption_center="left")
@@ -819,21 +819,27 @@ function simpletag(thetag)
 }
 //]]>
 </script>
-<table width="100%" cellspacing="0" cellpadding="5" border="0">
+<table style="width:100%;">
 <tr><td align="left" colspan="2">
-<table cellspacing="1" cellpadding="2" border="0">
-<tr>
-<td class="embedded"><input style="font-weight: bold;font-size:11px; margin-right:3px" type="button" name="b" value="B" onclick="javascript: simpletag('b')" /></td>
-<td class="embedded"><input class="codebuttons" style="font-style: italic;font-size:11px;margin-right:3px" type="button" name="i" value="I" onclick="javascript: simpletag('i')" /></td>
-<td class="embedded"><input class="codebuttons" style="text-decoration: underline;font-size:11px;margin-right:3px" type="button" name="u" value="U" onclick="javascript: simpletag('u')" /></td>
+<div class="btn-group">
+<input class="btn btn-default" style="font-weight:bold" type="button" name="b" value="B" onclick="javascript: simpletag('b')" />
+<input class="btn btn-default" style="font-style:italic" type="button" name="i" value="I" onclick="javascript: simpletag('i')" />
+<input class="btn btn-default" style="text-decoration:underline" type="button" name="u" value="U" onclick="javascript: simpletag('u')" />
+</div>
+<div class="btn-group">
 <?php
-print("<td class=\"embedded\"><input class=\"codebuttons\" style=\"font-size:11px;margin-right:3px\" type=\"button\" name='url' value='URL' onclick=\"javascript:tag_url('" . $lang_functions['js_prompt_enter_url'] . "','" . $lang_functions['js_prompt_enter_title'] . "','" . $lang_functions['js_prompt_error'] . "')\" /></td>");
-print("<td class=\"embedded\"><input class=\"codebuttons\" style=\"font-size:11px;margin-right:3px\" type=\"button\" name=\"IMG\" value=\"IMG\" onclick=\"javascript: tag_image('" . $lang_functions['js_prompt_enter_image_url'] . "','" . $lang_functions['js_prompt_error'] . "')\" /></td>");
-print("<td class=\"embedded\"><input type=\"button\" style=\"font-size:11px;margin-right:3px\" name=\"list\" value=\"List\" onclick=\"tag_list('" . addslashes($lang_functions['js_prompt_enter_item']) . "','" . $lang_functions['js_prompt_error'] . "')\" /></td>");
+print("<input class=\"btn btn-default\" type=\"button\" name='url' value='URL' onclick=\"javascript:tag_url('" . $lang_functions['js_prompt_enter_url'] . "','" . $lang_functions['js_prompt_enter_title'] . "','" . $lang_functions['js_prompt_error'] . "')\" />");
+print("<input class=\"btn btn-default\" type=\"button\" name=\"IMG\" value=\"IMG\" onclick=\"javascript: tag_image('" . $lang_functions['js_prompt_enter_image_url'] . "','" . $lang_functions['js_prompt_error'] . "')\" />");
+print("<input type=\"button\" class=\"btn btn-default\" name=\"list\" value=\"List\" onclick=\"tag_list('" . addslashes($lang_functions['js_prompt_enter_item']) . "','" . $lang_functions['js_prompt_error'] . "')\" />");
 ?>
-<td class="embedded"><input class="codebuttons" style="font-size:11px;margin-right:3px" type="button" name="quote" value="QUOTE" onclick="javascript: simpletag('quote')" /></td>
-<td class="embedded"><input style="font-size:11px;margin-right:3px" type="button" onclick='javascript:closeall();' name='tagcount' value="Close all tags" /></td>
-<td class="embedded"><select class="med codebuttons" style="margin-right:3px" name='color' onchange="alterfont(this.options[this.selectedIndex].value, 'color')">
+</div>
+<div class="btn-group">
+<input class="btn btn-default" type="button" name="quote" value="QUOTE" onclick="javascript: simpletag('quote')" />
+<input class="btn btn-default" type="button" onclick='javascript:closeall();' name='tagcount' value="Close all tags" />
+</div>
+<table style="width:100%;margin-top:15px;margin-bottom:15px;">
+<tr><td style="width:33%">
+<select class="form-control" style="margin-right:3px" name='color' onchange="alterfont(this.options[this.selectedIndex].value, 'color')">
 <option value='0'>--- <?php echo $lang_functions['select_color'] ?> ---</option>
 <option style="background-color: black" value="Black">Black</option>
 <option style="background-color: sienna" value="Sienna">Sienna</option>
@@ -875,9 +881,9 @@ print("<td class=\"embedded\"><input type=\"button\" style=\"font-size:11px;marg
 <option style="background-color: lightblue" value="LightBlue">Light Blue</option>
 <option style="background-color: plum" value="Plum">Plum</option>
 <option style="background-color: white" value="White">White</option>
-</select></td>
-<td class="embedded">
-<select class="med codebuttons" name='font' onchange="alterfont(this.options[this.selectedIndex].value, 'font')">
+</select>
+</td><td style="width:33%">
+<select class="form-control col-sm-4" name='font' onchange="alterfont(this.options[this.selectedIndex].value, 'font')">
 <option value="0">--- <?php echo $lang_functions['select_font'] ?> ---</option>
 <option value="Microsoft Yahei">微软雅黑</option>
 <option value="Simsun">宋体</option>
@@ -903,8 +909,8 @@ print("<td class=\"embedded\"><input type=\"button\" style=\"font-size:11px;marg
 <option value="Verdana">Verdana</option>
 </select>
 </td>
-<td class="embedded">
-<select class="med codebuttons" name='size' onchange="alterfont(this.options[this.selectedIndex].value, 'size')">
+<td style="width:33%">
+<select class="form-control col-sm-4" name='size' onchange="alterfont(this.options[this.selectedIndex].value, 'size')">
 <option value="0">--- <?php echo $lang_functions['select_size'] ?> ---</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -913,7 +919,8 @@ print("<td class=\"embedded\"><input type=\"button\" style=\"font-size:11px;marg
 <option value="5">5</option>
 <option value="6">6</option>
 <option value="7">7</option>
-</select></td></tr>
+</select>
+</td></tr>
 </table>
 </td>
 </tr>
@@ -922,16 +929,16 @@ if ($enableattach_attachment == 'yes'){
 ?>
 <tr>
 <td colspan="2" valign="middle">
-<iframe src="<?php echo get_protocol_prefix() . $BASEURL?>/attachment.php" width="100%" height="24" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+<iframe class="hidden-sm hidden-xs" src="<?php echo get_protocol_prefix() . $BASEURL?>/attachment.php" width="100%" height="30" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 </td>
 </tr>
 <?php
 }
 print("<tr>");
-print("<td align=\"left\"><textarea class=\"bbcode\" cols=\"100\" style=\"width: 650px;\" name=\"".$text."\" id=\"".$text."\" rows=\"20\" onkeydown=\"ctrlenter(event,'compose','qr')\">".$content."</textarea>");
+print("<td style=\"width:85%;\"><textarea class=\"form-control\" cols=\"100\" name=\"".$text."\" id=\"".$text."\" rows=\"20\" onkeydown=\"ctrlenter(event,'compose','qr')\">".$content."</textarea>");
 ?>
 </td>
-<td align="center" width="99%">
+<td align="center" width="15%">
 <table cellspacing="1" cellpadding="3">
 <tr>
 <?php
@@ -941,7 +948,7 @@ foreach ($quickSmilies as $smily) {
 	if ($i%4 == 0 && $i > 0) {
 		print('</tr><tr>');
 	}
-	print("<td class=\"embedded\" style=\"padding: 3px;\">".getSmileIt($form, $text, $smily)."</td>");
+	print("<td>".getSmileIt($form, $text, $smily)."</td>");
 	$i++;
 }
 ?>
@@ -984,23 +991,22 @@ function begin_compose($title = "",$type="new", $body="", $hassubject=true, $sub
 		}
 	}
 	begin_frame($framename, true);
-	print("<table class=\"main\" width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n");
+	print("<div>\n");
 	if ($hassubject)
-		print("<tr><td class=\"rowhead\">".$lang_functions['row_subject']."</td>" .
-"<td class=\"rowfollow\" align=\"left\"><input type=\"text\" style=\"width: 650px;\" name=\"subject\" maxlength=\"".$maxsubjectlength."\" value=\"".$subject."\" /></td></tr>\n");
-	print("<tr><td class=\"rowhead\" valign=\"top\">".$lang_functions['row_body']."</td><td class=\"rowfollow\" align=\"left\"><span style=\"display: none;\" id=\"previewouter\"></span><div id=\"editorouter\">");
+		print("<div class=\"form-group\"><label class=\"col-sm-2 control-label\" for=\"subject\">".$lang_functions['row_subject']."</label>" .
+"<div class=\"col-sm-10\"><input type=\"text\" class=\"form-control\" id=\"subject\" name=\"subject\" maxlength=\"".$maxsubjectlength."\" value=\"".$subject."\" /></div></div>\n");
+	print("<div class=\"form-group\"><label class=\"col-sm-2 control-label\" for=\"body\">".$lang_functions['row_body']."<span style=\"display: none;\" id=\"previewouter\"></span></label><div class=\"col-sm-10\">");
 	textbbcode("compose","body", $body, false);
-	print("</div></td></tr>");
+	print("</div></div>");
 }
 
 function end_compose(){
 	global $lang_functions;
-	print("<tr><td colspan=\"2\" align=\"center\"><table><tr><td class=\"embedded\"><input id=\"qr\" type=\"submit\" class=\"btn\" value=\"".$lang_functions['submit_submit']."\" /></td><td class=\"embedded\">");
-	print("<input type=\"button\" class=\"btn2\" name=\"previewbutton\" id=\"previewbutton\" value=\"".$lang_functions['submit_preview']."\" onclick=\"javascript:preview(this.parentNode);\" />");
-	print("<input type=\"button\" class=\"btn2\" style=\"display: none;\" name=\"unpreviewbutton\" id=\"unpreviewbutton\" value=\"".$lang_functions['submit_edit']."\" onclick=\"javascript:unpreview(this.parentNode);\" />");
-	print("</td></tr></table>");
-	print("</td></tr>");
-	print("</table>\n");
+	print("<div class=\"form-group\"><div class=\"col-sm-10 col-sm-offset-2\"><input id=\"qr\" type=\"submit\" class=\"btn btn-success\" value=\"".$lang_functions['submit_submit']."\" />&nbsp;");
+	print("&nbsp;<input type=\"button\" class=\"btn btn-info\" name=\"previewbutton\" id=\"previewbutton\" value=\"".$lang_functions['submit_preview']."\" onclick=\"javascript:preview(this.parentNode);\" />&nbsp;");
+	print("&nbsp;<input type=\"button\" class=\"btn btn-info\" style=\"display: none;\" name=\"unpreviewbutton\" id=\"unpreviewbutton\" value=\"".$lang_functions['submit_edit']."\" onclick=\"javascript:unpreview(this.parentNode);\" />");
+	print("</div></div>");
+	print("</div>\n");
 	end_frame();
 	print("<p align=\"center\"><a href=\"tags.php\" target=\"_blank\">".$lang_functions['text_tags']."</a> | <a href=\"smilies.php\" target=\"_blank\">".$lang_functions['text_smilies']."</a></p>\n");
 }
@@ -2062,7 +2068,7 @@ function menu ($selected = "home") {
 		$selected = "staff";
 	}else
 	$selected = "";
-	print ("<div id=\"nav\"><ul id=\"mainmenu\" class=\"nav nav-pills pull-right\">");
+	print ("<ul id=\"mainmenu\" class=\"nav navbar-nav\">");
 	print ("<li" . ($selected == "home" ? " class=\"active\"" : "") . "><a href=\"index.php\">" . $lang_functions['text_home'] . "</a></li>");
 	if ($enableextforum != 'yes')
 	print ("<li" . ($selected == "forums" ? " class=\"active\"" : "") . "><a href=\"forums.php\">".$lang_functions['text_forums']."</a></li>");
@@ -2077,13 +2083,14 @@ function menu ($selected = "home") {
 	print ("<li" . ($selected == "requests" ? " class=\"active\"" : "") . "><a href=\"viewrequests.php\">".$lang_functions['text_request']."</a></li>");
 	print ("<li" . ($selected == "upload" ? " class=\"active\"" : "") . "><a href=\"upload.php\">".$lang_functions['text_upload']."</a></li>");
 	print ("<li" . ($selected == "subtitles" ? " class=\"active\"" : "") . "><a href=\"subtitles.php\">".$lang_functions['text_subtitles']."</a></li>");
-	print ("<li" . ($selected == "usercp" ? " class=\"active\"" : "") . "><a href=\"usercp.php\">".$lang_functions['text_user_cp']."</a></li>");
-	print ("<li" . ($selected == "topten" ? " class=\"active\"" : "") . "><a href=\"topten.php\">".$lang_functions['text_top_ten']."</a></li>");
-	print ("<li" . ($selected == "log" ? " class=\"active\"" : "") . "><a href=\"log.php\">".$lang_functions['text_log']."</a></li>");
-	print ("<li" . ($selected == "rules" ? " class=\"active\"" : "") . "><a href=\"rules.php\">".$lang_functions['text_rules']."</a></li>");
-	print ("<li" . ($selected == "faq" ? " class=\"active\"" : "") . "><a href=\"faq.php\">".$lang_functions['text_faq']."</a></li>");
-	print ("<li" . ($selected == "staff" ? " class=\"active\"" : "") . "><a href=\"staff.php\">".$lang_functions['text_staff']."</a></li>");
-	print ("</ul></div>");
+	print ("<li class=\"visible-sm-block visible-md-block dropdown\"><a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-th-list\"></span><span class=\"caret\"></span></a><ul class=\"dropdown-menu\" role=\"menu\"><li><a href=\"usercp.php\">".$lang_functions['text_user_cp']."</a></li><li><a href=\"topten.php\">".$lang_functions['text_top_ten']."</a></li><li><a href=\"log.php\">".$lang_functions['text_log']."</a></li><li><a href=\"rules.php\">".$lang_functions['text_rules']."</a></li><li><a href=\"faq.php\">".$lang_functions['text_faq']."</a></li><li><a href=\"staff.php\">".$lang_functions['text_staff']."</a></li></ul></li>");
+	print ("<li class=\"hidden-sm hidden-md" . ($selected == "usercp" ? " active\"" : "\"") . "><a href=\"usercp.php\">".$lang_functions['text_user_cp']."</a></li>");
+	print ("<li class=\"hidden-sm hidden-md" . ($selected == "topten" ? " active\"" : "\"") . "><a href=\"topten.php\">".$lang_functions['text_top_ten']."</a></li>");
+	print ("<li class=\"hidden-sm hidden-md" . ($selected == "log" ? " active\"" : "\"") . "><a href=\"log.php\">".$lang_functions['text_log']."</a></li>");
+	print ("<li class=\"hidden-sm hidden-md" . ($selected == "rules" ? " active\"" : "\"") . "><a href=\"rules.php\">".$lang_functions['text_rules']."</a></li>");
+	print ("<li class=\"hidden-sm hidden-md" . ($selected == "faq" ? " active\"" : "\"") . "><a href=\"faq.php\">".$lang_functions['text_faq']."</a></li>");
+	print ("<li class=\"hidden-sm hidden-md" . ($selected == "staff" ? " active\"" : "\"") . "><a href=\"staff.php\">".$lang_functions['text_staff']."</a></li>");
+	print ("</ul>");
 
 	if ($CURUSER){
 		if ($where_tweak == 'yes')
@@ -2267,24 +2274,10 @@ if ($CURUSER){
 <body>
 <div class="container">
 <div class="row" style="padding-top:50px;">
-<div class="span8">
-<?php
-if ($logo_main == "")
-{
-?>
-			<div class="logo"><?php echo htmlspecialchars($SITENAME)?></div>
-			<div class="slogan"><?php echo htmlspecialchars($SLOGAN)?></div>
-<?php
-}
-else
-{
-?>
-			<div class="logo_img"><img src="<?php echo $logo_main?>" alt="<?php echo htmlspecialchars($SITENAME)?>" title="<?php echo htmlspecialchars($SITENAME)?> - <?php echo htmlspecialchars($SLOGAN)?>" /></div>
-<?php
-}
-?>
+<div class="col-sm-8">
+
 </div>
-<div class="span4">
+<div class="col-sm-4">
 <?php if ($Advertisement->enable_ad()){
 		$headerad=$Advertisement->get_ad('header');
 		if ($headerad){
@@ -2303,9 +2296,6 @@ if ($enabledonation == 'yes'){?>
 			<a href="login.php"><font class="big"><b><?php echo $lang_functions['text_login'] ?></b></font></a> / <a href="signup.php"><font class="big"><b><?php echo $lang_functions['text_signup'] ?></b></font></a>
 <?php } 
 else {
-	begin_main_frame();
-	menu ();
-	end_main_frame();
 
 	$datum = getdate();
 	$datum["hours"] = sprintf("%02.0f", $datum["hours"]);
@@ -2367,47 +2357,101 @@ else {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+	  <?php
+	  if ($logo_main == "")
+	  {
+	  ?>
+	  <a class="navbar-brand" title="<?php echo htmlspecialchars($SLOGAN)?>" href="/"><?php echo htmlspecialchars($SITENAME)?></a>
+	  <?php
+	  }
+	  else
+	  {
+	  ?>
+	  <a class="navbar-brand" title-"<?php echo htmlspecialchars($SLOGAN)?>" href="/"><img src="<?php echo $logo_main?>" alt="<?php echo htmlspecialchars($SITENAME)?>" /></a>
+	  <?php
+	  }
+	  ?>
 	 </div>
 		<div class="collapse navbar-collapse" id="pagenav">
-		<ul class="nav navbar-nav navbar-left">
-		<li><?php echo get_username($CURUSER['id'])?></li> 
-		<li><?php if (get_user_class() >= UC_MODERATOR) { ?> <a href="staffpanel.php" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang_functions['text_staff_panel'] ?>"><span class="glyphicon glyphicon-dashboard"></span><span class="visible-xs-inline"><?php echo $lang_functions['text_staff_panel'] ?></span></a><?php }?></li>
-		<li><?php if (get_user_class() >= UC_SYSOP) { ?> <a href="settings.php" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang_functions['text_site_settings'] ?>"><span class="glyphicon glyphicon-cog"></span><span class="visible-xs-inline"><?php echo $lang_functions['text_site_settings'] ?></span></a><?php } ?></li>
-		<li><a href="torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang_functions['text_bookmarks'] ?>"><span class="glyphicon glyphicon-heart"></span><span class="visible-xs-inline"><?php echo $lang_functions['text_bookmarks'] ?></span></a></li>
-		<li><a href="mybonus.php" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang_functions['text_bonus'] ?>：<?php echo number_format($CURUSER['seedbonus'], 1)?>"><span class="glyphicon glyphicon-star"></span><span class="visible-xs-inline"><?php echo $lang_functions['text_bonus'] ?>：<?php echo number_format($CURUSER['seedbonus'], 1)?></span></a></li>
-		<li><a href="invite.php?id=<?php echo $CURUSER['id']?>" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang_functions['text_invite'] ?>：<?php echo $CURUSER['invites']?>"><span class="glyphicon glyphicon-ok-circle"></span><span class="visible-xs-inline"><?php echo $lang_functions['text_invite'] ?>：<?php echo $CURUSER['invites']?></span></a></li>
-		<li class="hidden-sm hidden-md">
-			<a href="#"><span class="glyphicon glyphicon-refresh"></span><?php echo $lang_functions['text_ratio'] ?><?php echo $ratio?>
-			<span class="glyphicon glyphicon-open"></span><?php echo mksize($CURUSER['uploaded'])?>
-			<span class="glyphicon glyphicon-save"></span><?php echo mksize($CURUSER['downloaded'])?>
-			<span class="visible-xs-inline"><br /></span></a>
-		</li>
-		<li class="visible-md-block visible-sm-block">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span><span class="caret"></span></a>
-			<ul class="dropdown-menu" role="menu">
-            <li><a href="#"><span class="glyphicon glyphicon-refresh"></span><?php echo $lang_functions['text_ratio'] ?><?php echo $ratio?>
-			<span class="glyphicon glyphicon-open"></span><?php echo mksize($CURUSER['uploaded'])?>
-			<span class="glyphicon glyphicon-save"></span><?php echo mksize($CURUSER['downloaded'])?>
-			<span class="visible-xs-inline"><br /></span></a></li>
-            <li>
-			<a href="#"><?php echo $lang_functions['text_active_torrents'] ?>
-			<span class="glyphicon glyphicon-upload"></span><?php echo $activeseed?>
-			<span class="glyphicon glyphicon-download"></span><?php echo $activeleech?>
-			<span class="glyphicon glyphicon-transfer"></span><?php echo $connectable?>
-			<?php echo maxslots();?></a>
-			</li>
-          </ul>
-		</li>
-		</ul>
+		<?php menu();?>
 		<ul class="nav navbar-nav navbar-right">
-		<li class="hidden-md hidden-sm">
-			<a href="#"><?php echo $lang_functions['text_active_torrents'] ?>
-			<span class="glyphicon glyphicon-upload"></span><?php echo $activeseed?>
-			<span class="glyphicon glyphicon-download"></span><?php echo $activeleech?>
-			<span class="glyphicon glyphicon-transfer"></span><?php echo $connectable?>
-			<?php echo maxslots();?></a>
-		</li>
-		<?php
+			<?php if (get_user_class() >= UC_MODERATOR) { ?>
+			<li class="dropdown visible-sm-block">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="staffpanel.php"><?php echo $lang_functions['text_staff_panel']; ?></a></li>
+				<li><a href="settings.php"><?php echo $lang_functions['text_site_settings']; ?></a></li>
+			</ul>
+			</li>
+			<li class="dropdown hidden-sm">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>版主 <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="cheaters.php">异常流量分析</a></li>
+				<li><a href="ipcheck.php">同IP登录查询</a></li>
+				<li><a href="allagents.php">在线BT客户端</a></li>
+				<li><a href="admanage.php">广告管理</a></li>
+				<li><a href="uploaders.php">发布员管理</a></li>
+				<li><a href="stats.php">站点统计</a></li>
+				<li><a href="testip.php">IP地址测试</a></li>
+				<li><a href="amountbonus.php">给予魔力值</a></li>
+				<li><a href="clearcache.php">清理缓存</a></li>
+			</ul>
+			</li>
+			<?php }?>
+			<?php if (get_user_class() >= UC_ADMINISTRATOR) { ?>
+			<li class="dropdown hidden-sm">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>管理员 <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="adduser.php">添加用户</a></li>
+				<li><a href="reset.php">重置用户密码</a></li>
+				<li><a href="staffmess.php">批量发送PM</a></li>
+				<li><a href="polloverview.php">投票概况</a></li>
+				<li><a href="warned.php">被警告用户查询</a></li>
+				<li><a href="freeleech.php">Freeleech</a></li>
+				<li><a href="faqmanage.php">常见问题管理</a></li>
+				<li><a href="modrules.php">规则管理</a></li>
+				<li><a href="catmanage.php">种子分类管理</a></li>
+			</ul>
+			</li>
+			<?php } ?>
+			<?php if (get_user_class() >= UC_SYSOP) { ?>
+			<li class="dropdown hidden-sm">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>主管 <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="settings.php"><?php echo $lang_functions['text_site_settings']; ?></a></li>
+				<li role="presentation" class="divider"></li>
+				<li><a href="deletedisabled.php">删除被禁用户</a></li>
+				<li><a href="forummanage.php">论坛管理</a></li>
+				<li><a href="mysql_stats.php">MySQL数据库统计</a></li>
+				<li><a href="massmail.php">批量发送E-Mail</a></li>
+				<li><a href="docleanup.php">执行清理</a></li>
+				<li><a href="bans.php">IP封禁</a></li>
+				<li><a href="maxlogin.php">登录失败查询</a></li>
+				<li><a href="bitbucketlog.php">图片发布记录</a></li>
+				<li><a href="bannedemails.php">邮箱黑名单</a></li>
+				<li><a href="allowedemails.php">邮箱白名单</a></li>
+				<li><a href="location.php">IP所在地管理</a></li>
+				<li><a href="amountupload.php">给予上传量</a></li>
+			</ul>
+			</li>
+			<?php } ?>
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+			<li><?php echo get_username($CURUSER['id'])?></li>
+			<li class="divider"></li>
+			<li><a href="torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0"><?php echo $lang_functions['text_bookmarks'] ?></a></li>
+			<li><a href="mybonus.php"><?php echo $lang_functions['text_bonus'] ?>：<?php echo number_format($CURUSER['seedbonus'], 1)?></a></li>
+			<li><a href="invite.php?id=<?php echo $CURUSER['id']?>"><?php echo $lang_functions['text_invite'] ?>：<?php echo $CURUSER['invites']?></a></li>
+			<li role="presentation" class="divider"></li>
+			<li><a href="#"><?php echo $lang_functions['text_ratio'] ?><?php echo $ratio?> <span class="glyphicon glyphicon-open"></span><?php echo mksize($CURUSER['uploaded'])?> <span class="glyphicon glyphicon-save"></span><?php echo mksize($CURUSER['downloaded'])?></a></li>
+			<li><a href="#"><?php echo $lang_functions['text_active_torrents'] ?><span class="glyphicon glyphicon-upload"></span><?php echo $activeseed?> <span class="glyphicon glyphicon-download"></span><?php echo $activeleech?> <span class="glyphicon glyphicon-transfer"></span><?php echo $connectable?> <?php echo maxslots();?></a></li>
+			</ul>
+			</li>
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-envelope"></span> <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+			<?php
 			if (get_user_class() >= $staffmem_class){
 			$totalreports = $Cache->get_value('staff_report_count');
 			if ($totalreports == ""){
@@ -2424,15 +2468,16 @@ else {
 				$totalcheaters = get_row_count("cheaters");
 				$Cache->cache_value('staff_cheater_count', $totalcheaters, 900);
 			}
-			print("<li><a href=\"cheaterbox.php\" title=\"".$lang_functions['title_cheaterbox']."\"><span class=\"glyphicon glyphicon-ban-circle\"></span><span class=\"visible-xs-inline\">".$lang_functions['title_cheaterbox']."：</span>".$totalcheaters."</a></li><li><a href=\"reports.php\" title=\"".$lang_functions['title_reportbox']."\"><span class=\"glyphicon glyphicon-exclamation-sign\"></span><span class=\"visible-xs-inline\">".$lang_functions['title_reportbox']."：</span>".$totalreports."</a></li><li><a href=\"staffbox.php\" title=\"".$lang_functions['title_staffbox']."\"><span class=\"glyphicon glyphicon-flag\"></span><span class=\"visible-xs-inline\">".$lang_functions['title_staffbox']."：</span>".$totalsm."</a></li>");
+			print("<li><a href=\"cheaterbox.php\"><span class=\"glyphicon glyphicon-ban-circle\"></span>".$lang_functions['title_cheaterbox']."：".$totalcheaters."</a></li><li><a href=\"reports.php\"><span class=\"glyphicon glyphicon-exclamation-sign\"></span>".$lang_functions['title_reportbox']."：".$totalreports."</a></li><li><a href=\"staffbox.php\"><span class=\"glyphicon glyphicon-flag\"></span>".$lang_functions['title_staffbox']."：".$totalsm."</a></li>");
 			}
-			print("<li><a href=\"messages.php\"><span class=\"glyphicon glyphicon-floppy-save\"></span>".($messages ? $messages."（".$unread.$lang_functions['text_message_new']."）</a></li>" : "0"));
-			print("<li><a href=\"messages.php?action=viewmailbox&amp;box=-1\" title=\"".$lang_functions['title_sentbox']."\" ><span class=\"glyphicon glyphicon-floppy-open\"></span><span class=\"visible-xs-inline\">".$lang_functions['title_sentbox']."：</span>".($outmessages ? $outmessages : "0"));
-			print("</a></li><li><a href=\"friends.php\" title=\"".$lang_functions['title_buddylist']."\"><span class=\"glyphicon glyphicon-user\"></span><span class=\"visible-xs-inline\">".$lang_functions['title_buddylist']."</span></a></li>");
-			print("<li><a href=\"getrss.php\" title=\"".$lang_functions['title_get_rss']."\"><span class=\"glyphicon glyphicon-bookmark\"></span><span class=\"visible-xs-inline\">".$lang_functions['title_get_rss']."</span></a></li>");
-		?>
-		<li><a href="logout.php" title="<?php echo $lang_functions['text_logout'] ?>"><span class="glyphicon glyphicon-log-out"></span><span class="visible-xs-inline"><?php echo $lang_functions['text_logout'] ?></span></a></li>
-</ul>
+			print("<li><a href=\"messages.php\"><span class=\"glyphicon glyphicon-floppy-save\"></span>".$lang_functions['title_inbox']."：".($messages ? $messages."（".$unread.$lang_functions['text_message_new']."）</a></li>" : "0"));
+			print("<li><a href=\"messages.php?action=viewmailbox&amp;box=-1\"><span class=\"glyphicon glyphicon-floppy-open\"></span>".$lang_functions['title_sentbox']."：".($outmessages ? $outmessages : "0"));
+			print("</a></li><li><a href=\"friends.php\"><span class=\"glyphicon glyphicon-user\"></span>".$lang_functions['title_buddylist']."</a></li>");
+			print("<li><a href=\"getrss.php\"><span class=\"glyphicon glyphicon-bookmark\"></span>".$lang_functions['title_get_rss']."</a></li>");
+			?>
+			</ul></li>
+			<li><a href="logout.php" title="<?php echo $lang_functions['text_logout'] ?>"><span class="glyphicon glyphicon-log-out"></span><span class="visible-xs-inline"><?php echo $lang_functions['text_logout'] ?></span></a></li>
+			</ul>
 </div>
 </div>
 </nav>
@@ -2448,9 +2493,9 @@ if ($msgalert)
 {
 	function msgalert($url, $text, $bgcolor = "red")
 	{
-		print("<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>");
-		print("<b><a href=\"".$url."\">".$text."</a></b>");
-		print("</div>");
+		print("<div class=\"container\" style=\"margin-top:10px;\"><div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>");
+		print("<p><b><a href=\"".$url."\">".$text."</a></b></p>");
+		print("</div></div>");
 	}
 	if($CURUSER['leechwarn'] == 'yes')
 	{
@@ -2542,6 +2587,7 @@ if ($msgalert)
 			msgalert("cheaterbox.php",$text, "blue");
 		}
 	}
+	print("</div>");
 }
 		if ($offlinemsg)
 		{
@@ -2802,11 +2848,11 @@ function pager($rpp, $count, $href, $opts = array(), $pagename = "page") {
 			$pagerarr[] = "<font class=\"gray\"><b>$text</b></font>";
 		}
 		$pagerstr = join(" | ", $pagerarr);
-		$pagertop = "<div class=\"container\"><p align=\"center\">$pager<br />$pagerstr</p></div>\n";
-		$pagerbottom = "<div class=\"container\"><p align=\"center\">$pagerstr<br />$pager</p></div>\n";
+		$pagertop = "<div class=\"row\"><p align=\"center\">$pager<br />$pagerstr</p></div>\n";
+		$pagerbottom = "<div class=\"row\"><p align=\"center\">$pagerstr<br />$pager</p></div>\n";
 	}
 	else {
-		$pagertop = "<div class=\"container\"><p align=\"center\">$pager</p></div>\n";
+		$pagertop = "<div class=\"row\"><p align=\"center\">$pager</p></div>\n";
 		$pagerbottom = $pagertop;
 	}
 
