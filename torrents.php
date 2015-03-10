@@ -872,13 +872,13 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 <div class="panel panel-primary">
 <div class="panel-heading"><h2 class="panel-title"><a data-toggle="collapse" href="#ksearchboxmain" aria-expanded="true" aria-controls="ksearchboxmain"><?php echo $lang_torrents['text_search_box'] ?></a></h2></div>
 		<div id="ksearchboxmain" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-		<div class="panel=body">
+		<div class="panel-body">
 			<?php
 				function printcat($name, $listarray, $cbname, $wherelistina, $btname, $showimg = false)
 				{
 					global $catpadding,$catsperrow,$lang_torrents,$CURUSER,$CURLANGDIR,$catimgurl;
 
-					print("<div><b>".$name."</b></div><div class=\"row-fluid\">");
+					print("<div><b>".$name."</b></div><div class=\"row\">");
 					$i = 0;
 					foreach($listarray as $list){
 						if ($i && $i % $catsperrow == 0){
@@ -887,9 +887,9 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 						print("<div class=\"col-xs-4\"><input type=\"checkbox\" id=\"".$cbname.$list[id]."\" name=\"".$cbname.$list[id]."\"" . (in_array($list[id],$wherelistina) ? " checked=\"checked\"" : "") . " value=\"1\" />".($showimg ? return_category_image($list[id], "?") : "<a title=\"" .$list[name] . "\" href=\"?".$cbname."=".$list[id]."\">".$list[name]."</a>")."</div>");
 						$i++;
 					}
-					$checker = "<div class=\"col-xs-12\"><input name=\"".$btname."\" value='" .  $lang_torrents['input_check_all'] . "' class=\"btn medium\" type=\"button\" onclick=\"javascript:SetChecked('".$cbname."','".$btname."','". $lang_torrents['input_check_all'] ."','" . $lang_torrents['input_uncheck_all'] . "',-1,10)\" /></div>";
-					print("<td colspan=\"2\" class=\"bottom\" align=\"left\" style=\"padding-left: 15px\">".$checker."</td>\n");
-					print("</div>");
+					$checker = "<input name=\"".$btname."\" value='" .  $lang_torrents['input_check_all'] . "' class=\"btn medium\" type=\"button\" onclick=\"javascript:SetChecked('".$cbname."','".$btname."','". $lang_torrents['input_check_all'] ."','" . $lang_torrents['input_uncheck_all'] . "',-1,10)\" />";
+					print("<div class=\"col-xs-12\">".$checker."</div>");
+					print("</div><br />");
 				}
 			printcat($lang_torrents['text_category'],$cats,"cat",$wherecatina,"cat_check",true);
 
@@ -1036,6 +1036,7 @@ if ($count) {
 	print("</div>");
 }
 else {
+	print("<div class=\"col-md-8\">");
 	if (isset($searchstr)) {
 		print("<br />");
 		stdmsg($lang_torrents['std_search_results_for'] . $searchstr_ori . "\"",$lang_torrents['std_try_again']);
@@ -1043,6 +1044,7 @@ else {
 	else {
 		stdmsg($lang_torrents['std_nothing_found'],$lang_torrents['std_no_active_torrents']);
 	}
+	print("</div>");
 }
 if ($CURUSER){
 	if ($sectiontype == $browsecatmode)
