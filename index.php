@@ -254,20 +254,20 @@ if ($CURUSER && $showpolls_main == "yes")
 			$pollexists = false;
 		else $pollexists = true;
 
-		print("<h2>".$lang_index['text_polls']);
+		print("<div><h2>".$lang_index['text_polls']);
 
 			if (get_user_class() >= $pollmanage_class)
 			{
-				print("<font class=\"small\"> - [<a class=\"altlink\" href=\"makepoll.php?returnto=main\"><b>".$lang_index['text_new']."</b></a>]\n");
+				print("<div class=\"btn-group text-right\"><a class=\"btn btn-sm btn-default\" href=\"makepoll.php?returnto=main\"><b>".$lang_index['text_new']."</b></a>\n");
 				if ($pollexists)
 				{
-					print(" - [<a class=\"altlink\" href=\"makepoll.php?action=edit&amp;pollid=".$arr[id]."&amp;returnto=main\"><b>".$lang_index['text_edit']."</b></a>]\n");
-					print(" - [<a class=\"altlink\" href=\"log.php?action=poll&amp;do=delete&amp;pollid=".$arr[id]."&amp;returnto=main\"><b>".$lang_index['text_delete']."</b></a>]");
-					print(" - [<a class=\"altlink\" href=\"polloverview.php?id=".$arr[id]."\"><b>".$lang_index['text_detail']."</b></a>]");
+					print("<a class=\"btn btn-sm btn-default\" href=\"makepoll.php?action=edit&amp;pollid=".$arr[id]."&amp;returnto=main\"><b>".$lang_index['text_edit']."</b></a>\n");
+					print("<a class=\"btn btn-sm btn-default\" href=\"log.php?action=poll&amp;do=delete&amp;pollid=".$arr[id]."&amp;returnto=main\"><b>".$lang_index['text_delete']."</b></a>");
+					print("<a class=\"btn btn-sm btn-default\" href=\"polloverview.php?id=".$arr[id]."\"><b>".$lang_index['text_detail']."</b></a>");
 				}
-				print("</font>");
+				print("</div>");
 			}
-			print("</h2>");
+			print("</h2></div>");
 		if ($pollexists)
 		{
 			$pollid = 0+$arr["id"];
@@ -278,9 +278,10 @@ if ($CURUSER && $showpolls_main == "yes")
 			$arr["option10"], $arr["option11"], $arr["option12"], $arr["option13"], $arr["option14"],
 			$arr["option15"], $arr["option16"], $arr["option17"], $arr["option18"], $arr["option19"]);
 
-			print("<table width=\"100%\"><tr><td class=\"text\" align=\"center\">\n");
-			print("<table width=\"59%\" class=\"main\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\"><tr><td class=\"text\" align=\"left\">");
-			print("<p align=\"center\"><b>".$question."</b></p>\n");
+//			print("<table width=\"100%\"><tr><td class=\"text\" align=\"center\">\n");
+//			print("<table width=\"59%\" class=\"main\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\"><tr><td class=\"text\" align=\"left\">");
+			print("<div>");
+			print("<p class=\"text-center\"><b>".$question."</b></p>\n");
 
 			// Check if user has already voted
 			$res = sql_query("SELECT selection FROM pollanswers WHERE pollid=".sqlesc($pollid)." AND userid=".sqlesc($CURUSER["id"])) or sqlerr();
@@ -318,7 +319,7 @@ if ($CURUSER && $showpolls_main == "yes")
 
 				// now os is an array like this: array(array(123, "Option 1", 1), array(45, "Option 2", 2))
 				$Cache->add_whole_row();
-				print("<table class=\"main\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n");
+//				print("<table class=\"main\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n");
 				$Cache->end_whole_row();
 				$i = 0;
 				while ($a = $os[$i])
@@ -328,18 +329,18 @@ if ($CURUSER && $showpolls_main == "yes")
 					else
 						$p = round($a[0] / $tvotes * 100);
 					$Cache->add_row();
-					$Cache->add_part();
-					print("<tr><td width=\"1%\" class=\"embedded nowrap\">" . $a[1] . "&nbsp;&nbsp;</td><td width=\"99%\" class=\"embedded nowrap\"><img class=\"bar_end\" src=\"pic/trans.gif\" alt=\"\" /><img ");
-					$Cache->end_part();
-					$Cache->add_part();
-					print(" src=\"pic/trans.gif\" style=\"width: " . ($p * 3) ."px;\" alt=\"\" /><img class=\"bar_end\" src=\"pic/trans.gif\" alt=\"\" /> $p%</td></tr>\n");
-					$Cache->end_part();
+//					$Cache->add_part();
+					print("<div class=\"row\"><div class=\"col-sm-3 col-md-2 col-lg-1\">" . $a[1] . "</div><div class=\"col-sm-9 col-md-10 col-lg-11\"><div class=\"progress\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"$p\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:$p%\">");
+//					$Cache->end_part();
+//					$Cache->add_part();
+					print("</div></div></div></div>\n");
+//					$Cache->end_part();
 					$Cache->end_row();
 					++$i;
 				}
 				$Cache->break_loop();
 				$Cache->add_whole_row();
-				print("</table>\n");
+//				print("</table>\n");
 				$tvotes = number_format($tvotes);
 				print("<p align=\"center\">".$lang_index['text_votes']." ".$tvotes."</p>\n");
 				$Cache->end_whole_row();
@@ -361,21 +362,24 @@ if ($CURUSER && $showpolls_main == "yes")
 			else //user has not voted yet
 			{
 				print("<form method=\"post\" action=\"index.php\">\n");
+				print("<div class=\"btn-group-vertical\" style=\"width:100%;\" role=\"group\" data-toggle=\"buttons\">\n");
 				$i = 0;
 				while ($a = $o[$i])
 				{
-					print("<input type=\"radio\" name=\"choice\" value=\"".$i."\">".$a."<br />\n");
+					print("<label class=\"btn btn-info btn-lg\"><input type=\"radio\" name=\"choice\" value=\"".$i."\">".$a."</label>\n");
 					++$i;
 				}
-				print("<br />");
-				print("<input type=\"radio\" name=\"choice\" value=\"255\">".$lang_index['radio_blank_vote']."<br />\n");
-				print("<p align=\"center\"><input type=\"submit\" class=\"btn\" value=\"".$lang_index['submit_vote']."\" /></p>");
+				print("<label class=\"btn btn-warning btn-lg\"><input type=\"radio\" name=\"choice\" value=\"255\">".$lang_index['radio_blank_vote']."</label>\n");
+				print("</div>");
+				print("<br /><br /><p class=\"text-center\"><input type=\"submit\" class=\"btn btn-success\" value=\"".$lang_index['submit_vote']."\" /></p>");
+				print("</form>\n");
 			}
-			print("</td></tr></table>");
+//			print("</td></tr></table>");
 
 			if ($voted && get_user_class() >= $log_class)
 				print("<p align=\"center\"><a href=\"log.php?action=poll\">".$lang_index['text_previous_polls']."</a></p>\n");
-			print("</td></tr></table>");
+			print("</div>");
+//			print("</td></tr></table>");
 		}
 }
 // ------------- end: polls ------------------//
