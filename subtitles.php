@@ -249,7 +249,7 @@ if (get_user_class() >= UC_PEASANT)
 	begin_main_frame();
 
 	?>
-<div align=center>
+<div class="container">
 <?php
 	if (!$size = $Cache->get_value('subtitle_sum_size')){
 		$res = sql_query("SELECT SUM(size) AS size FROM subs");

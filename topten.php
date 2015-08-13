@@ -456,6 +456,7 @@ function languagetable($res, $frame_caption)
 
 stdhead($lang_topten['head_top_ten']);
 begin_main_frame();
+print ("<div class=\"container\">");
 $type = isset($_GET["type"]) ? 0 + $_GET["type"] : 0;
 if (!in_array($type,array(1,2,3,4,5,6,7)))
 $type = 1;
@@ -752,6 +753,7 @@ elseif ($type == 7)	// search
 	}
 }
 */
+	print("</div>");
 	end_main_frame();
 	print("<p><font class=\"small\">".$lang_topten['text_this_page_last_updated'].date('Y-m-d H:i:s'). ", ".$lang_topten['text_started_recording_date'].$datefounded.$lang_topten['text_update_interval']."</font></p>");
 	$Cache->end_whole_row();

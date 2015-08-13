@@ -19,9 +19,11 @@ if (!$is_rulelang){
 }
 $res = sql_query("SELECT * FROM rules WHERE lang_id = ".sqlesc($lang_id)." ORDER BY id");
 while ($arr=mysql_fetch_assoc($res)){
+	print("<div class=\"container\">");
 	begin_frame($arr[title], false);
 	print(format_comment($arr["text"]));
 	end_frame();
+	print("</div>");
 }
 end_main_frame();
 }

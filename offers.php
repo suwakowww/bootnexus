@@ -695,6 +695,7 @@ $num = mysql_num_rows($res);
 
 stdhead($lang_offers['head_offers']);
 begin_main_frame();
+print("<div class=\"container\">");
 begin_frame($lang_offers['text_offers_section'], true,10,"100%","center");
 
 print("<p align=\"left\"><b><font size=\"5\">".$lang_offers['text_rules']."</font></b></p>\n");
@@ -834,6 +835,7 @@ print("<td class=\"colhead\">".$lang_offers['col_offered_by']."</td>".
 if(!isset($CURUSER) || $CURUSER['showlastcom'] == 'yes')
 create_tooltip_container($lastcom_tooltip, 400);
 }
+print("</div>");
 end_main_frame();
 $USERUPDATESET[] = "last_offer = ".sqlesc(date("Y-m-d H:i:s"));
 stdfoot();
