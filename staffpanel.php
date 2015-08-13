@@ -16,6 +16,7 @@ if (get_user_class() < UC_MODERATOR)
 }
 else {
 ?>
+<div class="row">
 <div class="container">
 <div role="tabpanel">
 	<ul class="nav nav-tabs" role="tablist">
@@ -108,7 +109,7 @@ else {
 			</a>
 		<?php }?>
 		<?php if (get_user_class() >= UC_SYSOP) {?>
-			<a href="docleanup.php" class="list-group-item list-group-item-danger">
+			<a href="forummanage.php" class="list-group-item list-group-item-danger">
 				<h4 class="list-group-item-heading">论坛管理</h4>
 				<p class="list-group-item-text">管理论坛版块。</p>
 			</a>
@@ -179,6 +180,7 @@ else {
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="webmaster">欢迎使用网站后台！</div>
 	</div>
+</div>
 </div>
 </div>
 <?php }

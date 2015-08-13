@@ -181,7 +181,7 @@ function insert_compose_frame($id, $type = 'new')
 	$hassubject = false;
 	$subject = "";
 	$body = "";
-	print("<form id=\"compose\" class=\"form-horizontal\" method=\"post\" name=\"compose\" action=\"?action=post\">\n");
+	print("<div class=\"container\"><form id=\"compose\" class=\"form-horizontal\" method=\"post\" name=\"compose\" action=\"?action=post\">\n");
 	switch ($type){
 		case 'new':
 		{
@@ -233,7 +233,7 @@ function insert_compose_frame($id, $type = 'new')
 	print("<input type=\"hidden\" name=\"type\" value=\"".$type."\" />");
 	begin_compose($title, $type, $body, $hassubject, $subject);
 	end_compose();
-	print("</form>");
+	print("</form></div>");
 }
 // ------------- end: functions ------------------//
 // ------------- start: Global variables ------------------//
@@ -611,13 +611,13 @@ if ($action == "viewtopic")
 	//------ Print table
 
 	begin_main_frame();
-	print("<p class=\"text-right\"><tr>\n");
+	print("<div class=\"container\"><p class=\"text-right\"><tr>\n");
 	print("&nbsp;".$lang_forums['there_is']."<b>".$views."</b>".$lang_forums['hits_on_this_topic']);
 	if ($maypost)
 	{
 		print("&nbsp;&nbsp;&nbsp;<a class=\"btn btn-primary\" href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\">".$lang_forums['title_reply_directly']."</a>");
 	}
-	print("</p>\n");
+	print("</p></div>\n");
 	begin_frame();
 
 	$pc = mysql_num_rows($res);
